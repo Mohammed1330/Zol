@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>زول للخدمات الإلكترونية - نموذج بيع وتأجير سيارات، عقارات، مواتر، ملابس، ومحال تجارية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Amiri', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            direction: rtl;
+            color: black;
+        }
+        .header {
+            text-align: center;
+            padding: 50px 0;
+            background-color: #2C3E50;
+            color: white;
+            font-size: 36px;
+        }
+        .subheader {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 10px;
+            color: #7F8C8D;
+        }
+        .form-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .form {
+            background-color: #ffffff;
+            border: 1px solid #BDC3C7;
+            padding: 30px;
+            border-radius: 10px;
+            width: 800px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form input, .form select, .form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #BDC3C7;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .form label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .form button {
+            padding: 10px;
+            background-color: #27AE60; /* اللون الأخضر */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .form .back-button {
+            background-color: #BDC3C7;
+            margin-top: 20px;
+        }
+        .image-upload-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .image-upload {
+            width: 30%;
+        }
+        .image-upload input {
+            width: 100%;
+        }
+        .image-upload label {
+            text-align: center;
+            margin-top: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        زول للخدمات الإلكترونية - نموذج بيع وتأجير سيارات، عقارات، مواتر، ملابس، ومحال تجارية
+    </div>
+    <div class="subheader">
+        www.zol.com
+    </div>
+
+    <div class="form-container">
+        <div class="form">
+            <h2>إضافة إعلان بيع أو تأجير</h2>
+            <form id="itemForm">
+                <!-- نوع العنصر -->
+                <label for="itemType">نوع العنصر:</label>
+                <select id="itemType" required>
+                    <option value="">اختر نوع العنصر</option>
+                    <option value="سيارة">سيارة</option>
+                    <option value="عقار">عقار</option>
+                    <option value="موتر">موتر</option>
+                    <option value="ملابس">ملابس</option>
+                    <option value="محل تجاري">محل تجاري</option>
+                </select>
+
+                <!-- حالة العنصر -->
+                <label for="condition">حالة العنصر:</label>
+                <select id="condition" required>
+                    <option value="">اختر حالة العنصر</option>
+                    <option value="جديد">جديد</option>
+                    <option value="مستعمل">مستعمل</option>
+                </select>
+
+                <!-- السعر -->
+                <label for="price">السعر:</label>
+                <input type="number" id="price" placeholder="أدخل السعر" required>
+
+                <!-- رقم التواصل -->
+                <label for="contactNumber">رقم التواصل:</label>
+                <input type="tel" id="contactNumber" placeholder="أدخل رقم الهاتف" required>
+
+                <!-- رفع صور العنصر -->
+                <label>رفع صور العنصر:</label>
+                <div class="image-upload-container">
+                    <!-- الصورة 1 -->
+                    <div class="image-upload">
+                        <label for="image1">صورة 1</label>
+                        <input type="file" id="image1" accept="image/*" required>
+                    </div>
+                    <!-- الصورة 2 -->
+                    <div class="image-upload">
+                        <label for="image2">صورة 2</label>
+                        <input type="file" id="image2" accept="image/*" required>
+                    </div>
+                    <!-- الصورة 3 -->
+                    <div class="image-upload">
+                        <label for="image3">صورة 3</label>
+                        <input type="file" id="image3" accept="image/*" required>
+                    </div>
+                </div>
+
+                <!-- تفاصيل إضافية بناءً على نوع العنصر -->
+                <div id="additionalFields"></div>
+
+                <!-- زر إرسال الطلب -->
+                <button type="submit">رفع الإعلان</button>
+            </form>
+
+            <!-- زر رجوع إلى الموقع -->
+            <button class="back-button" onclick="window.location.href='https://www.zol.com';">رجوع إلى الموقع</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('itemForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // الحصول على بيانات النموذج
+            const itemType = document.getElementById('itemType').value;
+            const condition = document.getElementById('condition').value;
+            const price = document.getElementById('price').value;
+            const contactNumber = document.getElementById('contactNumber').value;
+
+            // الحصول على الصور
+            const image1 = document.getElementById('image1').files[0];
+            const image2 = document.getElementById('image2').files[0];
+            const image3 = document.getElementById('image3').files[0];
+
+            let additionalInfo = '';
+
+            // إضافة حقول إضافية بناءً على نوع العنصر
+            if (itemType === 'سيارة') {
+                const model = prompt("أدخل موديل السيارة");
+                const year = prompt("أدخل سنة الصنع");
+                const mileage = prompt("أدخل المسافة المقطوعة بالكيلومترات");
+                additionalInfo = `<p>موديل: ${model}</p><p>سنة الصنع: ${year}</p><p>المسافة المقطوعة: ${mileage} كيلومتر</p>`;
+            } else if (itemType === 'عقار') {
+                const location = prompt("أدخل موقع العقار");
+                const area = prompt("أدخل المساحة بالمتر المربع");
+                additionalInfo = `<p>الموقع: ${location}</p><p>المساحة: ${area} متر مربع</p>`;
+            } else if (itemType === 'موتر') {
+                const engineCapacity = prompt("أدخل سعة المحرك");
+                const color = prompt("أدخل لون الدراجة");
+                additionalInfo = `<p>سعة المحرك: ${engineCapacity}</p><p>اللون: ${color}</p>`;
+            } else if (itemType === 'ملابس') {
+                const size = prompt("أدخل حجم الملابس");
+                const brand = prompt("أدخل ماركة الملابس");
+                additionalInfo = `<p>الحجم: ${size}</p><p>الماركة: ${brand}</p>`;
+            } else if (itemType === 'محل تجاري') {
+                const location = prompt("أدخل موقع المحل");
+                const area = prompt("أدخل المساحة بالمتر المربع");
+                additionalInfo = `<p>الموقع: ${location}</p><p>المساحة: ${area} متر مربع</p>`;
+            }
+
+            // عرض بيانات العنصر المرفوعة
+            const showcase = document.createElement('div');
+            showcase.innerHTML = `
+                <h3>تفاصيل العنصر المعروض:</h3>
+                <p>النوع: ${itemType}</p>
+                <p>الحالة: ${condition}</p>
+                <p>السعر: ${price}</p>
+                <p>رقم التواصل: ${contactNumber}</p>
+                ${additionalInfo}
+                <h4>صور العنصر:</h4>
+                <img src="${URL.createObjectURL(image1)}" alt="صورة 1" width="200" />
+                <img src="${URL.createObjectURL(image2)}" alt="صورة 2
